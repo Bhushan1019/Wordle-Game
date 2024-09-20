@@ -1,38 +1,55 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import Icon from "@/assets/images/wordle-icon.svg";
 import { Link } from "expo-router";
 import { format } from "date-fns";
+import { Colors } from "@/constants/Colors";
+import ThemedText from "@/components/ThemedText";
 export default function Index() {
+  const colorScheme = useColorScheme();
+  const backgroundColor = Colors[colorScheme ?? "light"].background;
+  const textColor = Colors[colorScheme ?? "light"].text;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor }]}>
       <View style={styles.header}>
         <Icon width={100} height={70} />
-        <Text style={styles.title}>Wordle</Text>
-        <Text style={styles.text}>Get 6 chances to guess a 5-letter word.</Text>
+        <ThemedText style={styles.title}>Wordle</ThemedText>
+        <ThemedText style={styles.text}>
+          Get 6 chances to guess a 5-letter word.
+        </ThemedText>
       </View>
       <View style={styles.menu}>
         <Link
           href={"/game"}
-          style={[styles.btn, { backgroundColor: "#000" }]}
+          style={[
+            styles.btn,
+            { backgroundColor: colorScheme === "light" ? "#000" : "#4a4a4a" },
+          ]}
           asChild
         >
           <TouchableOpacity>
             <Text style={[styles.btnText, styles.primaryText]}>Play</Text>
           </TouchableOpacity>
         </Link>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Settings</Text>
+        <TouchableOpacity style={[styles.btn, { borderColor: textColor }]}>
+          <ThemedText style={styles.btnText}>Settings</ThemedText>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.btnText}>Log in</Text>
+        <TouchableOpacity style={[styles.btn, { borderColor: textColor }]}>
+          <ThemedText style={styles.btnText}>Log in</ThemedText>
         </TouchableOpacity>
       </View>
       <View style={styles.footer}>
-        <Text style={styles.footerDate}>
+        <ThemedText style={styles.footerDate}>
           {format(new Date(), "MMMM d, yyyy")}
-        </Text>
-        <Text style={styles.footerText}>Made by Bhushan</Text>
+        </ThemedText>
+        <ThemedText style={styles.footerText}>Made by Bhushan</ThemedText>
       </View>
     </View>
   );
