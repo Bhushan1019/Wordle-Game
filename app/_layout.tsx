@@ -89,6 +89,15 @@ export default function RootLayout() {
                     // ),
                   }}
                 />
+                <Stack.Screen
+                  name="game"
+                  options={{
+                    headerBackTitle: "Wordle",
+                    headerTintColor: colorScheme === "dark" ? "#fff" : "#000",
+                    title: "Wordle",
+                    // headerTransparent: true,
+                  }}
+                />
               </Stack>
             </BottomSheetModalProvider>
           </GestureHandlerRootView>
