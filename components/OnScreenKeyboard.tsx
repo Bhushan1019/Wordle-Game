@@ -1,4 +1,5 @@
 import {
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -32,7 +33,7 @@ const OnScreenKeyboard = ({
   grayLetters,
 }: OnScreenKeyboardProps) => {
   const { width } = useWindowDimensions();
-  const keyWidth = (width - 60) / keys[0].length;
+  const keyWidth = Platform.OS === "web" ? 53 : (width - 60) / keys[0].length;
   const keyHeight = 60;
 
   const isSpecialKey = (key: string) => [ENTER, BACKSPACE].includes(key);

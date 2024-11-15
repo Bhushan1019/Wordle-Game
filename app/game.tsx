@@ -1,4 +1,5 @@
 import {
+  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -8,7 +9,10 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { Colors } from "@/constants/Colors";
 import { Stack, useRouter } from "expo-router";
-import OnScreenKeyboard from "@/components/OnScreenKeyboard";
+import OnScreenKeyboard, {
+  BACKSPACE,
+  ENTER,
+} from "@/components/OnScreenKeyboard";
 import { Ionicons } from "@expo/vector-icons";
 import { allWords } from "@/utils/allWords";
 import { words } from "@/utils/targetWords";
@@ -269,6 +273,29 @@ const Page = () => {
     });
   }, [curRow]);
 
+  //web
+  useEffect(() => {
+    const handleKeyDown = (e: any) => {
+      if (e.key === "Enter") {
+        addKey(ENTER);
+      } else if (e.key === "Backspace") {
+        addKey(BACKSPACE);
+      } else if (e.key.length === 1) {
+        addKey(e.key);
+      }
+    };
+
+    if (Platform.OS === "web") {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    // Don't forget to clean up
+    return () => {
+      if (Platform.OS === "web") {
+        document.removeEventListener("keydown", handleKeyDown);
+      }
+    };
+  }, [curCol]);
   return (
     <View style={[styles.container, { backgroundColor }]}>
       <SettingsModal ref={settingsModalRef} />
