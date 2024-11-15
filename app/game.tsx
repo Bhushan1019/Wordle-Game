@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { allWords } from "@/utils/allWords";
 import { words } from "@/utils/targetWords";
 
-const ROWS = 6;
+const ROWS = 1;
 
 const Page = () => {
   const colorScheme = useColorScheme();
@@ -89,7 +89,13 @@ const Page = () => {
 
     setTimeout(() => {
       if (currentWord === word) {
+        router.push(
+          `/end?win=true&word=${word}&gameField=${JSON.stringify(rows)}`
+        );
       } else if (curRow + 1 >= rows.length) {
+        router.push(
+          `/end?win=false&word=${word}&gameField=${JSON.stringify(rows)}`
+        );
       }
     }, 0);
     setCurRow(curRow + 1);
