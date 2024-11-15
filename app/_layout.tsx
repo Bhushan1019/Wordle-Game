@@ -25,6 +25,8 @@ import { tokenCache } from "@/utils/cache";
 import Logo from "@/assets/images/nyt-logo.svg";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
+import { useMMKVBoolean } from "react-native-mmkv";
+import { storage } from "@/components/storage";
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
@@ -39,13 +41,13 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const router = useRouter();
-  // const [dark] = useMMKVBoolean('dark-mode', storage);
+  const [dark] = useMMKVBoolean("dark-mode", storage);
 
-  // useEffect(() => {
-  //   if (Platform.OS !== 'web') {
-  //     Appearance.setColorScheme(dark ? 'dark' : 'light');
-  //   }
-  // }, [dark]);
+  useEffect(() => {
+    if (Platform.OS !== "web") {
+      Appearance.setColorScheme(dark ? "dark" : "light");
+    }
+  }, [dark]);
 
   let [fontsLoaded] = useFonts({
     FrankRuhlLibre_800ExtraBold,
