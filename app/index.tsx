@@ -14,6 +14,14 @@ import { useRef } from "react";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import SubscribeModal from "@/components/SubscribeModal";
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
+import Animated, {
+  FadeIn,
+  FadeInDown,
+  FadeInLeft,
+} from "react-native-reanimated";
+
+const AnimatedTouchableOpacity =
+  Animated.createAnimatedComponent(TouchableOpacity);
 
 export default function Index() {
   const colorScheme = useColorScheme();
@@ -30,13 +38,13 @@ export default function Index() {
     <View style={[styles.container]}>
       <SubscribeModal ref={subscribeModalRef} />
 
-      <View style={styles.header}>
+      <Animated.View style={styles.header} entering={FadeIn}>
         <Icon width={100} height={70} />
         <ThemedText style={styles.title}>Wordle</ThemedText>
         <ThemedText style={styles.text}>
           Get 6 chances to guess a 5-letter word.
         </ThemedText>
-      </View>
+      </Animated.View>
       <View style={styles.menu}>
         <Link
           href={"/game"}
@@ -46,9 +54,9 @@ export default function Index() {
           ]}
           asChild
         >
-          <TouchableOpacity>
+          <AnimatedTouchableOpacity entering={FadeInLeft}>
             <Text style={[styles.btnText, styles.primaryText]}>Play</Text>
-          </TouchableOpacity>
+          </AnimatedTouchableOpacity>
         </Link>
 
         <SignedOut>
@@ -57,34 +65,36 @@ export default function Index() {
             style={[styles.btn, { borderColor: textColor }]}
             asChild
           >
-            <TouchableOpacity>
+            <AnimatedTouchableOpacity entering={FadeInLeft.delay(100)}>
               <ThemedText style={styles.btnText}>Log in</ThemedText>
-            </TouchableOpacity>
+            </AnimatedTouchableOpacity>
           </Link>
         </SignedOut>
 
         <SignedIn>
-          <TouchableOpacity
+          <AnimatedTouchableOpacity
             onPress={() => signOut()}
             style={[styles.btn, { borderColor: textColor }]}
+            entering={FadeInLeft.delay(100)}
           >
             <ThemedText style={styles.btnText}>Sign Out</ThemedText>
-          </TouchableOpacity>
+          </AnimatedTouchableOpacity>
         </SignedIn>
 
-        <TouchableOpacity
+        <AnimatedTouchableOpacity
+          entering={FadeInLeft.delay(300)}
           onPress={handlePresentSubscribeModal}
           style={[styles.btn, { borderColor: textColor }]}
         >
           <ThemedText style={styles.btnText}>Subscribe</ThemedText>
-        </TouchableOpacity>
+        </AnimatedTouchableOpacity>
       </View>
-      <View style={styles.footer}>
+      <Animated.View style={styles.footer} entering={FadeIn.delay(300)}>
         <ThemedText style={styles.footerDate}>
           {format(new Date(), "MMMM d, yyyy")}
         </ThemedText>
         <ThemedText style={styles.footerText}>Made by Bhushan</ThemedText>
-      </View>
+      </Animated.View>
     </View>
   );
 }
