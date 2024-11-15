@@ -50,8 +50,11 @@ const Page = () => {
   const settingsModalRef = useRef<BottomSheetModal>(null);
   const handlePresentSettingsModal = () => settingsModalRef.current?.present();
 
-  // const [word, setWord] = useState<string>(words[Math.floor(Math.random()* words.length)]);
-  const [word, setWord] = useState("randy");
+  const [word, setWord] = useState<string>(
+    words[Math.floor(Math.random() * words.length)]
+  );
+  // console.log(word);
+  // const [word, setWord] = useState("randy");
   const wordLetters = word.split("");
 
   const colStateRef = useRef(curCol);
@@ -93,7 +96,8 @@ const Page = () => {
       return;
     }
     if (!allWords.includes(currentWord)) {
-      // shakeRow();
+      shakeRow();
+      return;
     }
     flipRow();
 
