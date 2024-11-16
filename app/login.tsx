@@ -38,7 +38,7 @@ const Page = () => {
 
       if (createdSessionId) {
         setActive!({ session: createdSessionId });
-        router.back();
+        router.replace("/");
       }
     } catch (error) {
       console.error("Error starting OAuth flow", error);
