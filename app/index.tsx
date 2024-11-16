@@ -81,13 +81,16 @@ export default function Index() {
           </AnimatedTouchableOpacity>
         </SignedIn>
 
-        <AnimatedTouchableOpacity
+        {/* <AnimatedTouchableOpacity
           entering={FadeInLeft.delay(300)}
           onPress={handlePresentSubscribeModal}
           style={[styles.btn, { borderColor: textColor }]}
         >
           <ThemedText style={styles.btnText}>Subscribe</ThemedText>
-        </AnimatedTouchableOpacity>
+        </AnimatedTouchableOpacity> */}
+        <View>
+          <Text> </Text>
+        </View>
       </View>
       <Animated.View style={styles.footer} entering={FadeIn.delay(300)}>
         <ThemedText style={styles.footerDate}>

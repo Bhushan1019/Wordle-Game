@@ -79,7 +79,8 @@ export default function RootLayout() {
                   options={{
                     presentation: "modal",
                     headerShadowVisible: false,
-                    headerTitle: () => <Logo width={100} height={30} />,
+                    headerTitle: "",
+                    // headerTitle: () => <Logo width={100} height={30} />,
                     // headerLeft: () => (
                     //   <TouchableOpacity onPress={() => router.back()}>
                     //     <Ionicons
