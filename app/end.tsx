@@ -142,6 +142,20 @@ const Page = () => {
         <Text style={styles.title}>
           {win === "ture" ? "Congratulations!" : "Thanks for playing today!"}
         </Text>
+        <Text style={{ fontSize: 20, fontFamily: "FrankRuhlLibre_500Medium" }}>
+          The Word was
+          <Text
+            style={{
+              fontSize: 28,
+              color: "green",
+              textTransform: "uppercase",
+              fontFamily: "FrankRuhlLibre_500Medium",
+            }}
+          >
+            {" "}
+            {word}
+          </Text>
+        </Text>
 
         <SignedOut>
           <Text style={styles.text}>Want to see your stats and streaks?</Text>
