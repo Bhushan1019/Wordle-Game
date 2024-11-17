@@ -1,4 +1,5 @@
 import {
+  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,7 +14,7 @@ import ThemedText from "@/components/ThemedText";
 import { useRef } from "react";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import SubscribeModal from "@/components/SubscribeModal";
-import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-expo";
+import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
 import Animated, {
   FadeIn,
   FadeInDown,
@@ -29,6 +30,8 @@ export default function Index() {
   const textColor = Colors[colorScheme ?? "light"].text;
   const subscribeModalRef = useRef<BottomSheetModal>(null);
 
+  const { user } = useUser();
+
   const handlePresentSubscribeModal = () =>
     subscribeModalRef.current?.present();
 
@@ -36,8 +39,26 @@ export default function Index() {
 
   return (
     <View style={[styles.container]}>
-      <SubscribeModal ref={subscribeModalRef} />
-
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Image
+          source={{ uri: user?.imageUrl }}
+          style={{
+            width: 35,
+            height: 35,
+            borderRadius: 99,
+          }}
+        />
+        <ThemedText style={{ fontSize: 18, fontWeight: "bold", margin: 10 }}>
+          {user?.fullName}
+        </ThemedText>
+      </View>
       <Animated.View style={styles.header} entering={FadeIn}>
         <Icon width={100} height={70} />
         <ThemedText style={styles.title}>Wordle</ThemedText>
